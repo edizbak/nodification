@@ -1,27 +1,44 @@
 # LoutreBase
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
+Petit hub de liens réalisé avec Rust et Leptos, compilé en WebAssembly avec
+Trunk.
 
-## Development server
+## Développement avec le Dev Container
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Le projet fournit une configuration de Dev Container dans `.devcontainer/`.
+Utilisez Podman comme moteur de conteneurs et ouvrez le dossier du projet dans
+le Dev Container depuis VS Code. L’environnement installe la cible
+`wasm32-unknown-unknown` et Trunk.
 
-## Code scaffolding
+Lancez le serveur de développement dans le terminal intégré de VS Code :
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```sh
+trunk serve --address 0.0.0.0
+```
 
-## Build
+Ouvrez ensuite <http://localhost:8080>. Le port est transféré par VS Code.
+Le serveur Trunk tourne dans le Dev Container : il n’est pas nécessaire de
+lancer un deuxième conteneur pour le site. Après un rechargement de la fenêtre,
+reconnectez-vous au Dev Container existant plutôt que d’en créer un autre.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Le Dev Container sert d’environnement de développement ; les fichiers du projet
+restent dans le dossier du workspace ouvert par VS Code.
 
-## Running unit tests
+## Développement sans conteneur
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Installez Rust, puis la cible WebAssembly et Trunk :
 
-## Running end-to-end tests
+```sh
+rustup target add wasm32-unknown-unknown
+cargo install trunk --locked
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Lancez ensuite le serveur avec la même commande `trunk serve` ci-dessus.
 
-## Further help
+## Compilation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```sh
+trunk build --release
+```
+
+Les destinations d’exemple sont définies dans `src/main.rs`.

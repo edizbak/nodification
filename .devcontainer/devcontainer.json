@@ -1,0 +1,18 @@
+{
+  "name": "Loutre - Leptos",
+  "image": "mcr.microsoft.com/devcontainers/rust:1-trixie",
+  "features": {},
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Loutre",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "rustup target add wasm32-unknown-unknown && cargo install trunk --locked",
+  "customizations": {
+    "vscode": {
+      "extensions": ["rust-lang.rust-analyzer"]
+    }
+  }
+}
